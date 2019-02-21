@@ -2,7 +2,7 @@
 # Ignore files that aren't necessary
 *.xml
 *.iml
-
+*.DS_store
 # Ignore the virtual environment
 venv
 

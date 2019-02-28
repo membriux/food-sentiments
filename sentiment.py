@@ -16,19 +16,21 @@ def get_review_sentiment(review) -> int:
     """
     
     analysis = TextBlob(review)
+    return analysis.sentiment.polarity
+
     # set sentiment
-    if analysis.sentiment.polarity > 0:
-        return 'positive'
-    elif analysis.sentiment.polarity == 0:
-        return 'neutral'
-    else:
-        return 'negative'
+    # if analysis.sentiment.polarity > 0:
+    #     return 'positive'
+    # elif analysis.sentiment.polarity == 0:
+    #     return 'neutral'
+    # else:
+    #     return 'negative'
 
 def get_search_criteria() -> tuple:
     """
     get user input, just default values for now
     """
-    return ('tacos', 50, 10000, 'Irvine')
+    return ('burgers', 50, 10000, 'Irvine')
 
 def get_params_for_search() -> dict:
     """

@@ -5,6 +5,9 @@
 *.DS_store
 # Ignore the virtual environment
 venv
-# Ignore vscode files
+# Ignore folders that aren't necessary
 .vscode
+__pycache__
+# Ignore private files
+YelpAPI.py
 

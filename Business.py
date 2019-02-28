@@ -18,5 +18,6 @@ class Business:
         self.reviews = '[Review]'
         self.overall_sentiment = 'avg of all sentiments'
 
+
     
         

@@ -1,21 +1,13 @@
+# Analyzer.py
 import nltk
 import ssl
 from textblob import TextBlob
 from collections import defaultdict
 import requests
 import pprint
+
 # create a py file called YelpAPI and put your API key there:
 from YelpAPI import API_KEY
-
-# Analyzer.py
-
-    # set sentiment
-    # if analysis.sentiment.polarity > 0:
-    #     return 'positive'
-    # elif analysis.sentiment.polarity == 0:
-    #     return 'neutral'
-    # else:
-    #     return 'negative'
 
 def get_search_criteria() -> tuple:
     """
@@ -43,6 +35,13 @@ def get_business_data() -> dict:
     response = requests.get(url = endpoint, params = params, headers = HEADERS)
     data = response.json()['businesses']
     return data
+
+def get_businesses():
+    businesses = []
+    business_dict = get_business_data()
+    for d in business_dict:
+        businesses.append(Business(d))
+    return businesses
 
 def get_reviews_data_from_yelp(business: str):
     """

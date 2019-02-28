@@ -3,9 +3,12 @@
 *.xml
 *.iml
 *.DS_store
-
-
-# Ignore directories (i.e. virtual environment)
+# Ignore the virtual environment
 venv
+# Ignore folders that aren't necessary
+.vscode
+__pycache__
 yelp_dataset
+# Ignore private files
+YelpAPI.py
 

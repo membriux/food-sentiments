@@ -3,6 +3,9 @@
 *.xml
 *.iml
 *.DS_store
-# Ignore the virtual environment
+
+
+# Ignore directories (i.e. virtual environment)
 venv
+yelp_dataset
 

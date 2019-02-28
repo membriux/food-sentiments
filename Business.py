@@ -8,6 +8,7 @@
 # reviews = {review_id: sentiment}, 
 
 import Review
+import json
 
 class Business:
     def __init__(self, business_dict):
@@ -17,6 +18,12 @@ class Business:
         self.stars = business_dict['rating']
         self.reviews = '[Review]'
         self.overall_sentiment = 'avg of all sentiments'
+
+    def get_reviews(self):
+        with open('yelp_dataset/review.json') as json_data:
+            data = json.load(json_data)
+
+        return data
 
 
     

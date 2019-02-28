@@ -9,6 +9,7 @@
 
 import Review
 import json
+import ijson
 
 class Business:
     def __init__(self, business_dict):
@@ -20,8 +21,12 @@ class Business:
         self.overall_sentiment = 'avg of all sentiments'
 
     def get_reviews(self):
+        data = ijson.parse(open('yelp_dataset/review.json', 'r'))
+        '''
         with open('yelp_dataset/review.json') as json_data:
-            data = json.load(json_data)
+            data = json.load(json_data)'''
+
+        for i in data: print(i)
 
         return data
 

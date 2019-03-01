@@ -4,11 +4,14 @@ Click==7.0
 Flask==1.0.2
 gunicorn==19.9.0
 idna==2.8
-ijson==2.3
 itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.0
 nltk==3.4
+numpy==1.16.2
+pandas==0.24.1
+python-dateutil==2.8.0
+pytz==2018.9
 requests==2.21.0
 singledispatch==3.4.0.3
 six==1.12.0

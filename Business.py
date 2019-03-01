@@ -9,7 +9,14 @@
 
 import Review
 import json
-import ijson
+import pandas
+from YelpAPI import API_KEY
+import requests
+
+
+HEADERS = {'Authorization': 'bearer {}'.format(API_KEY)}
+REVIEWS = {}
+
 
 class Business:
     def __init__(self, business_dict):
@@ -17,18 +24,30 @@ class Business:
         self.name = business_dict['name']
         self.review_count = business_dict['review_count']
         self.stars = business_dict['rating']
-        self.reviews = '[Review]'
+        self.reviews = self.get_reviews()
         self.overall_sentiment = 'avg of all sentiments'
 
     def get_reviews(self):
-        data = ijson.parse(open('yelp_dataset/review.json', 'r'))
-        '''
-        with open('yelp_dataset/review.json') as json_data:
-            data = json.load(json_data)'''
+        """
+        Helper function for retrieving reviews data
+        from yelp
+        """
+        global REVIEWS
+        with open('review.json', 'r') as js:
+            REVIEWS = json.load(js)
+            if self.id in REVIEWS:
+                return REVIEWS[self.id]
 
-        for i in data: print(i)
-
-        return data
+        
+        with open('review.json', 'w') as j_file:
+            endpoint = 'https://api.yelp.com/v3/businesses/{}/reviews'.format(self.id)
+            response = requests.get(url = endpoint, headers = HEADERS)
+            data = response.json()
+            REVIEWS[self.id] = data
+            json.dump(REVIEWS, j_file, sort_keys=True, indent=4)
+            
+            return REVIEWS[self.id]
+    
 
 
     

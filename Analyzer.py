@@ -47,8 +47,8 @@ def get_businesses():
     business_dict = get_business_data()
     for d in business_dict:
         businesses.append(Business(d))
-    return businesses[0].get_reviews()
-    #return businesses
+    #return businesses[0].get_reviews()
+    return businesses
 
 def get_reviews_data_from_yelp(business: str):
     """
@@ -94,7 +94,7 @@ def print_review_sentiments():
             print('\n\nNEXT REVIEW\n\n')
 
 #print_review_sentiments()
-pp.pprint(get_businesses())
+#pp.pprint(get_businesses())
 
 
 

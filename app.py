@@ -1,26 +1,25 @@
 from flask import Flask
-from Analyzer import get_businesses
+from modules.Business import GatherBusinesses
 
 
 BUSINESSES = []
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return 'Welcome!'
 
-
 # Get the info about business
 def analyze_businesses():
     global BUSINESSES
-    BUSINESSES = get_businesses()
+    b = GatherBusinesses()
+    BUSINESSES = b.business_list
     print('Analyzing businesses\n')
     for b in BUSINESSES:
         print(b.name)
         print(b.review_count)
-        print(b.stars)
+        print(b.rating)
         print(b.reviews)
         print(b.overall_sentiment)
 

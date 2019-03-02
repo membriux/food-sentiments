@@ -3,6 +3,7 @@
 *.xml
 *.iml
 *.DS_store
+review.json
 # Ignore the virtual environment
 venv
 # Ignore folders that aren't necessary
@@ -10,4 +11,5 @@ venv
 __pycache__
 # Ignore private files
 YelpAPI.py
+
 

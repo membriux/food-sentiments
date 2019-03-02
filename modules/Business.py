@@ -104,6 +104,19 @@ class Business:
     # Helper methods which are private and should not be accessed outside
     # of this class:
 
+    def _ensure_json_exists(self):
+        """
+        Checks if a review.json file exists
+        in the directory. If it does not exist,
+        this method creates the file. 
+        """
+        try:
+            f = open('review.json', 'r')
+            f.close()
+        except FileNotFoundError:
+            f = open('review.json', 'w')
+            f.close()
+
     def _get_reviews(self) -> [Review]:
         """
         Helper function for retrieving reviews data
@@ -111,6 +124,7 @@ class Business:
         Returns a list of Review objects
         """
         global ALL_REVIEWS
+        self._ensure_json_exists()
         with open('review.json', 'r') as js:
             try:
                 ALL_REVIEWS = json.load(js)

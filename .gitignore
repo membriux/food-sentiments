@@ -10,4 +10,4 @@ venv
 .vscode
 __pycache__
 # Ignore private files
-# YelpAPI.py
+YelpAPI.py

@@ -19,7 +19,7 @@ Coming soon…
 
 ## Authors
 
-* **Guillermo Sanhez** - [Membriux](https://github.com/membriux)
+* **Guillermo Sanchez** - [Membriux](https://github.com/membriux)
     - Initial deign/planning/prototying
     - MVC Architecture design + implementation
     - Flask framework implementation

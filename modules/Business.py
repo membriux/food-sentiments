@@ -1,4 +1,4 @@
-""" 
+"""
 Business.py
 Contains a classes that deal with Businesses:
    - A Business class to represent Business objects
@@ -24,11 +24,11 @@ import pprint
 # Used when retreiving data from Yelp
 HEADERS = {'Authorization': 'bearer {}'.format(API_KEY)}
 
-# A dictionary where the keys are business ids and the values are 
+# A dictionary where the keys are business ids and the values are
 # dictionaries of reviews. This dictionary stores
-# all reviews for each business. A global dictionary is 
+# all reviews for each business. A global dictionary is
 # necessary to minimize our calls from Yelp. Yelp has a limit
-# on how many API calls we can make per day, so storing the 
+# on how many API calls we can make per day, so storing the
 # data we retreive, to minimize API calls, is ideal
 ALL_REVIEWS = {}
 
@@ -45,13 +45,15 @@ class GatherBusinesses:
     and retrieves a list of businesses
     from Yelp, based on the input
     """
-    def __init__(self):
+    def __init__(self, term, location):
         # list of businesses
+        self.term = term
+        self.location = location
         self.business_list = self._get_businesses()
 
     # Helper methods which are private and should not be accessed outside
     # of this class:
-    
+
     def _get_businesses(self):
         """
         Retrieves a list of businesses
@@ -67,16 +69,14 @@ class GatherBusinesses:
         """
         get user input for term and location
         """
-        term = input("input a search term: ")
-        location = input("input a location: ")
 
-        return {'term': term, 'limit': LIMIT, 
-        'radius': RADIUS, 'location': location}
+        return {'term': self.term, 'limit': LIMIT,
+        'radius': RADIUS, 'location': self.location}
 
     def _get_business_data(self, params: dict) -> dict:
         """
         returns data from yelp given search criteria in the form
-        of search term (such as 'tacos'), limit of search, radius, 
+        of search term (such as 'tacos'), limit of search, radius,
         and location
         """
         endpoint = 'https://api.yelp.com/v3/businesses/search'
@@ -89,7 +89,7 @@ class Business:
         # public attributes that can be accessed by
         # other files:
 
-        self.id = business_dict['id'] 
+        self.id = business_dict['id']
         self.name = business_dict['name']
         self.review_count = business_dict['review_count']
         self.rating = business_dict['rating']
@@ -97,9 +97,10 @@ class Business:
          # a list of Review objects
         self.reviews = self._get_reviews()
 
-        # an overall sentiment calculated using all of the reviews
-        # for this business
-        self.overall_sentiment = self._calculate_overall_sentiment() 
+        # Sentiment score is calculated using all of the reviews
+        # for this business and get the the feeling based on the score
+        self.sentiment_score = self._calculate_sentiment_score()
+        self.overall_sentiment = self._get_overall_sentiment()
 
     # Helper methods which are private and should not be accessed outside
     # of this class:
@@ -108,7 +109,7 @@ class Business:
         """
         Checks if a review.json file exists
         in the directory. If it does not exist,
-        this method creates the file. 
+        this method creates the file.
         """
         try:
             f = open('review.json', 'r')
@@ -139,7 +140,7 @@ class Business:
 
     def _get_list_of_reviews(self):
         """
-        Helper function used for retreiving 
+        Helper function used for retreiving
         reviews
         """
         global ALL_REVIEWS
@@ -161,17 +162,41 @@ class Business:
             ALL_REVIEWS[self.id] = response.json()
             json.dump(ALL_REVIEWS, j_file, sort_keys=True, indent=4)
 
-    def _calculate_overall_sentiment(self):
+    def _calculate_sentiment_score(self):
         """
-        Calculates the overall sentiment for this
+        Calculates the sentiment score for this
         business using all of the reviews
         """
         total = 0
         for review in self.reviews:
             total += review.sentiment
-        return total/len(self.reviews)
-    
+        analysis = total/len(self.reviews)
+        return "%.2f" % analysis
+
+    def _get_overall_sentiment(self):
+        """
+        Determine the overall sentiment for this
+        business using the sentiment score
+        """
+        score = float(self.sentiment_score)
+        if score < -0.50:
+            return 'Negative'
+        elif -0.50 < score < -0.25:
+            return 'Somewhat Negative'
+        elif -0.25 < score < 0.25:
+            return 'Neutral'
+        elif 0.25 < score < 0.50:
+            return 'Somewhat positive'
+        else:
+            return 'Positive'
 
 
-    
-        
+
+
+
+
+
+
+
+
+print()

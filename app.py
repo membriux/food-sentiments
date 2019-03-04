@@ -1,10 +1,11 @@
 from flask import Flask, url_for, render_template, request
-from modules.Business import GatherBusinesses
-
+from modules.Business import GatherBusinesses, Business
+import json
 
 BUSINESSES = []
 
 app = Flask(__name__)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -23,19 +24,21 @@ def index():
     else:
         return render_template('index.html')
 
+
+@app.route('/reviews/<bid>')
+def business(bid):
+    for b in BUSINESSES:
+        if bid == b.id:
+            return render_template('routing/business.html',
+                                    business=b)
+
 # Get the info about business
 def analyze_businesses(term, location):
     global BUSINESSES
     b = GatherBusinesses(term, location)
     BUSINESSES = b.business_list
-    # print('Analyzing businesses\n')
-    # for b in BUSINESSES:
-    #     print(b.name)
-    #     print(b.review_count)
-    #     print(b.rating)
-    #     print(b.sentiment_score)
-    #     print(b.overall_sentiment)
+
 
 if __name__ == '__main__':
     print('Running app...')
-    app.run(debug=True)
+    app.run()

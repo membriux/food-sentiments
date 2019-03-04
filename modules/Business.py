@@ -169,7 +169,7 @@ class Business:
         """
         total = 0
         for review in self.reviews:
-            total += review.sentiment
+            total += float(review.sentiment)
         analysis = total/len(self.reviews)
         return "%.2f" % analysis
 

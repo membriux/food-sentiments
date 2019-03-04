@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href='{{ url_for('index')}}'><button type="button" class="btn btn-primary"> Back </button></a>
+            <h1>Reviews for {% block title %} {{business.name}} {% endblock %} </h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Review</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Sentiment Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in business.reviews: %}
+                        <tr>
+                            <th scope="row">{{r.username}}</th>
+                            <td>{{r.text}}</td>
+                            <td>{{r.rating}}</td>
+                            <td>{{r.sentiment}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

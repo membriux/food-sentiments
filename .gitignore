@@ -11,3 +11,7 @@ venv
 __pycache__
 # Ignore private files
 YelpAPI.py
+# Ignore heroku files
+runtime.txt
+Procfile
+.Procfile.swp

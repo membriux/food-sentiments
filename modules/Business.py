@@ -181,13 +181,13 @@ class Business:
         score = float(self.sentiment_score)
         if score < -0.50:
             return 'Negative'
-        elif -0.50 < score < -0.25:
+        elif -0.50 <= score < -0.25:
             return 'Somewhat Negative'
-        elif -0.25 < score < 0.25:
+        elif -0.25 <= score < 0.25:
             return 'Neutral'
-        elif 0.25 < score < 0.50:
+        elif 0.25 <= score <= 0.50:
             return 'Somewhat positive'
-        else:
+        elif 0.50 <= score:
             return 'Positive'
 
 

@@ -1,0 +1,27 @@
+to-do.txt
+
+Memo:
+    Retrieve inputs from user
+    - Web app templating
+        • Create input items and retrieve inputs
+        • Create HTML table and make it pretty
+        • Add clickable business that shows details of reviews
+    - Use [Businesses] and list them in a table in HTML
+        • Use bootstrap for nice templating
+
+Additional changes I made:
+Business.py
+    - added sentiment_score (float) attribute to Business class
+    - overall_sentiment -> string (i.e. 'Neutral', Positive', 'Negative' )
+        • sentiment_score is the original overall_sentiment
+    - Changed function name:
+        • _calculate_overall_sentiment -> _calculate_sentiment_score
+    - Added function _get_overall_sentiment that returns string for overall_sentiment
+
+Josh:
+    Finish classes for business, analyzer, review
+    -  unction for get_reviews and get_overall_sentiment (Busines.py)
+    -  Function to get_sentiment_of_review(review) on Review class
+    -  Create function that takes in search input of food and city
+        ****** • return [Businesses] ******
+    clean up code

@@ -41,37 +41,6 @@
         <div class="col">
             <small class="text-secondary"> <b>Showing results for: </b>{{term}} in {{location}}</small>
             <br>
-            <h2 class="text-center">At a Glance</h2>
-            <h4 class="text-center">
-                Highest sentiment-score:
-                <span class="text-info">
-                    {{topsent.name}} - {{topsent.sentiment_score}}
-                </span> |
-                Highest rating:
-                <span class="text-info">
-                    {{toprating.name}} - {{toprating.rating}}
-                </span>
-            </h4>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col">
-            <div id="chart">
-               <embed type="image/svg+xml" src= {{ schart|safe }} />
-            </div>
-        </div>
-        <div class="col">
-            <div id="chart">
-               <embed type="image/svg+xml" src= {{ rchart|safe }} />
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col">
             <table class="table">
                 <thead>
                     <tr>
@@ -82,6 +51,10 @@
                         <th scope="col">Overall Sentiment</th>
                     </tr>
                 </thead>
+                <p class="text-secondary">
+                    Sentiment score range from -1 and 1 |
+                    Oveall rating range from 0 - 5
+                </p>
                 <tbody>
                     {% for b in businesses: %}
 
@@ -104,6 +77,59 @@
             </table>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center">At a Glance</h2>
+            <h4 class="text-center">
+                Highest sentiment-score:
+                <span class="text-info">
+                    {{topsent.name}} - {{topsent.sentiment_score}}
+                </span> |
+                Highest rating:
+                <span class="text-info">
+                    {{toprating.name}} - {{toprating.rating}}
+                </span>
+            </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="chart">
+               <embed type="image/svg+xml" src= {{ schart|safe }} />
+            </div>
+        </div>
+        <div class="col">
+            <div id="chart">
+               <embed type="image/svg+xml" src= {{ rchart|safe }} />
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col text-center">
+            <h4> Sentiment score vs. Rating Analysis</h4>
+            <small class="text-secondary">
+                Sentiment score and rating adjusted to range 0 to 2 for comparison.
+            </small>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col">
+            <div id="chart">
+               <embed type="image/svg+xml" src= {{ srchart|safe }} />
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
 </div>
 {% endif %}
 {% endblock %}

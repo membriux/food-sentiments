@@ -33,10 +33,10 @@ HEADERS = {'Authorization': 'bearer {}'.format(API_KEY)}
 ALL_REVIEWS = {}
 
 # constants
-LIMIT = 3
+LIMIT = 9
 RADIUS = 35000
 
-# for testing purposes
+# pprint for testing purposes
 pp = pprint.PrettyPrinter()
 
 class GatherBusinesses:
@@ -185,7 +185,7 @@ class Business:
             return 'Somewhat Negative'
         elif -0.25 <= score < 0.25:
             return 'Neutral'
-        elif 0.25 <= score <= 0.50:
+        elif 0.25 <= score < 0.50:
             return 'Somewhat positive'
         elif 0.50 <= score:
             return 'Positive'

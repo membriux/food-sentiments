@@ -42,6 +42,12 @@
         <div class="col">
             <small class="text-secondary"> <b>Showing results for: </b>{{term}} in {{location}}</small>
             <br>
+            <div id="rchart">
+               <embed type="image/svg+xml" src= {{ schart|safe }} />
+            </div>
+            <div id="schart">
+               <embed type="image/svg+xml" src= {{ rchart|safe }} />
+            </div>
             <table class="table">
                 <thead>
                     <tr>

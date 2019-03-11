@@ -1,13 +1,17 @@
 from flask import Flask, url_for, render_template, request, session
 from modules.Business import GatherBusinesses, Business
+from modules.Graphs import Graph
 import json
 import os
 
-BUSINESSES = []
-SEARCH = {'term': None, 'location': None}
 
 app = Flask(__name__)
-app.secret_key = os.urandom(8)
+app.secret_key = os.urandom(24)
+
+BUSINESSES = []
+SEARCH = {'term': None, 'location': None}
+GRAPHS = None
+
 
 @app.before_request
 def setup():
@@ -18,22 +22,25 @@ def setup():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    print('\n\nSEARCH', SEARCH.values(), '\n\n')
-    print(SEARCH == {})
+    # Store session of user
+    session['user'] = os.urandom(8)
+
     if request.method == 'POST' and \
             request.form['term'] != '' and \
             request.form['location'] != '':
-        # Store session
-        session['user'] = 'user'
+
         # Get search inputs
         SEARCH['term'] = request.form['term']
         SEARCH['location'] = request.form['location']
         # Get businesses
         analyze_businesses()
 
+
     if BUSINESSES != [] and SEARCH != {}:
         return render_template('index.html', search=True,
                                 businesses=BUSINESSES,
+                                schart=GRAPHS.sentiment_bar.render_data_uri(),
+                                rchart=GRAPHS.rating_bar.render_data_uri(),
                                 location=SEARCH['location'], term=SEARCH['term'])
     else:
         return render_template('index.html')
@@ -53,6 +60,12 @@ def analyze_businesses():
     term, location = SEARCH['term'], SEARCH['location']
     b = GatherBusinesses(term, location)
     BUSINESSES = b.business_list
+    get_graphs()
+
+
+def get_graphs():
+    global GRAPHS
+    GRAPHS = Graph(BUSINESSES)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 from flask import Flask, url_for, render_template, request, session
 from modules.Business import GatherBusinesses, Business
 from modules.Graphs import Graph
+import pygal
 import json
 import os
 
@@ -37,10 +38,13 @@ def index():
 
 
     if BUSINESSES != [] and SEARCH != {}:
+        top = get_top()
         return render_template('index.html', search=True,
                                 businesses=BUSINESSES,
-                                schart=GRAPHS.sentiment_bar.render_data_uri(),
-                                rchart=GRAPHS.rating_bar.render_data_uri(),
+                                topsent=top[0],
+                                toprating=top[1],
+                                schart=GRAPHS.sentiment_bar,
+                                rchart=GRAPHS.rating_bar,
                                 location=SEARCH['location'], term=SEARCH['term'])
     else:
         return render_template('index.html')
@@ -62,7 +66,20 @@ def analyze_businesses():
     BUSINESSES = b.business_list
     get_graphs()
 
+# Get top-rated and top-sentiment_score business
+def get_top():
+    tops, topr = None, None
+    s, r = 0, 0
+    for b in BUSINESSES:
+        if float(b.sentiment_score) > s:
+            s = float(b.sentiment_score)
+            tops = b
+        if float(b.rating) > r:
+            r = float(b.rating)
+            topr = b
+    return [tops, topr]
 
+# Create graphs for businesses
 def get_graphs():
     global GRAPHS
     GRAPHS = Graph(BUSINESSES)

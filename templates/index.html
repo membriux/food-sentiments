@@ -1,16 +1,14 @@
 
 
 
-{% extends '/base.html' %}
-
-{% block title %} Food Sentiments {% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <h1> Food Sentiments </h1>
+            <h1> {% block title %} Food Sentiments {% endblock %} </h1>
             <small class="text-secondary">Analyze food sentiments of reviews of food from restaurants on Yelp.</small> <br>
         </div>
     </div>
@@ -38,16 +36,42 @@
 
 {% if businesses %}
 <div class="container">
+
     <div class="row">
         <div class="col">
             <small class="text-secondary"> <b>Showing results for: </b>{{term}} in {{location}}</small>
             <br>
-            <div id="rchart">
+            <h2 class="text-center">At a Glance</h2>
+            <h4 class="text-center">
+                Highest sentiment-score:
+                <span class="text-info">
+                    {{topsent.name}} - {{topsent.sentiment_score}}
+                </span> |
+                Highest rating:
+                <span class="text-info">
+                    {{toprating.name}} - {{toprating.rating}}
+                </span>
+            </h4>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <div id="chart">
                <embed type="image/svg+xml" src= {{ schart|safe }} />
             </div>
-            <div id="schart">
+        </div>
+        <div class="col">
+            <div id="chart">
                <embed type="image/svg+xml" src= {{ rchart|safe }} />
             </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
             <table class="table">
                 <thead>
                     <tr>

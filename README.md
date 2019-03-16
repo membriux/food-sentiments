@@ -9,7 +9,7 @@ Type inputs for the food item and location you want to search and the app will r
 
 ## Video Walkthrough/Example
 
-![Walkthrough](walkthrough.gif)
+![Walkthrough](/walkthrough.gif)
 
 ## Built With
 

@@ -9,25 +9,28 @@ Type inputs for the food item and location you want to search and the app will r
 
 ## Video Walkthrough/Example
 
-Coming soon…
+![Walkthrough](blob/master/walkthrough.gif)
 
 ## Built With
 
 * [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3) - Used to collect data
 * [Flask](http://flask.pocoo.org/) - Web development framework for Python
+* [Pygal](http://pygal.org/en/stable/) - "Sexy" Python Charting
 * [TextBlob](https://textblob.readthedocs.io/en/dev/) - Text processing/Sentiment Analysis
 
 ## Authors
 
 * **Guillermo Sanchez** - [Membriux](https://github.com/membriux)
-    - Initial deign/planning/prototying
+    - Initial deign/planning/prototyping
     - MVC Architecture design + implementation
     - Flask framework implementation
+    - Data Analysis + Charting with Pygal
     - TextBlob implementation
 * **Josh Tavassolikhah** - [JoshTavasso](https://github.com/JoshTavasso)
     - Initial design/planning/prototyping
+    - Yelp API Implementation
     - Created Data Models: Business and Reviews class
-    - More…
+
 
 ## License
 

@@ -13,7 +13,11 @@ BUSINESSES = []
 SEARCH = {'term': None, 'location': None}
 GRAPHS = None
 
-
+"""
+Before each request from the web,
+we check if the user is in session so that
+it gets it's personal unique search.
+"""
 @app.before_request
 def setup():
     global BUSINESSES, SEARCH
@@ -69,6 +73,13 @@ def business(bid):
         if bid == b.id:
             return render_template('routing/business.html',
                                     business=b)
+"""
+About Page
+"""
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 """
 Get businesses from Yelp API and create

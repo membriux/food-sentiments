@@ -1,0 +1,81 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+{% block home %} {% endblock %}
+<!-- {% block about %} active {% endblock %} -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Food-Sentiment</h1>
+                <p>
+
+                Food-Sentiment is a web app that tells you what people are feeling about certain food items from the YelpAPI.
+                While reading reviews from the business, you might notice that the ratings don't match with the sentiment analysis. That's because an rating number tells one side of the story, but the sentiments of users tell another.
+                </p>
+
+            <br>
+
+            <h3>How it works</h3>
+                <p>
+                    Type inputs for the food item and location you want to search and the app will return a table showing the information about each business (specially the sentiment analysis).
+                    User can click on the name of the business and it will take them to a page showing the analyzed reviews with the sentiment score of each.
+                </p>
+
+            <br>
+
+
+            <h3>Built with</h3>
+                <ul>
+                    <li><a href="https://www.yelp.com/developers/documentation/v3">Yelp Fusion API</a> - Used to collect data</li>
+                    <li><a href="http://flask.pocoo.org/">Flask</a> - Web development framework for Python </li>
+                    <li><a href="http://pygal.org/en/stable/">Pygal</a> - "Sexy" Python Charting</li>
+                    <li><a href="https://textblob.readthedocs.io/en/dev/">TextBlob</a> - Text processing/Sentiment Analysis</li>
+                </ul>
+
+            <br>
+
+            <h3 class="text-center">Authors/Creators</h3>
+
+            <br>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col">
+            <h5>Guillermo Sanchez - <a href="http://github.com/membriux">Membriux</a></h5>
+                <ul>
+                    <li>Initial deign/planning/prototyping</li>
+                    <li>MVC Architecture design + implementation</li>
+                    <li>Flask framework implementation</li>
+                    <li>Data Analysis + Charting with Pygal</li>
+                    <li>TextBlob implementation</li>
+                </ul>
+        </div>
+
+        <div class="col">
+            <h5>Josh Tavassolikhah - <a href="https://github.com/JoshTavasso">JoshTavasso</a></h5>
+                <ul>
+                    <li>Initial design/planning/prototyping</li>
+                    <li>Yelp API Implementation</li>
+                    <li>Created Data Models: Business and Reviews class</li>
+
+                </ul>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Walkthrough</h3>
+                <img src="{{ url_for('static', filename='walkthrough.gif') }}" alt="">
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 
 # Ignore files that aren't necessary
+.env
 *.xml
 *.iml
 *.DS_store

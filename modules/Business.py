@@ -16,13 +16,13 @@ import requests
 from modules.Review import Review
 
 # the API KEY needed for getting data from Yelp
-from YelpAPI import API_KEY
+import os
 
 # for testing purposes
 import pprint
 
 # Used when retreiving data from Yelp
-HEADERS = {'Authorization': 'bearer {}'.format(API_KEY)}
+HEADERS = {'Authorization': 'bearer {}'.format(os.getenv('API_KEY'))}
 
 # A dictionary where the keys are business ids and the values are
 # dictionaries of reviews. This dictionary stores
